@@ -1,13 +1,55 @@
 {%extends "template.html"%}
 {%block content%}
 <div class="login-dark">
-    <form method="post">
-        <div class="illustration"><i class="icon ion-ios-person-outline"></i></div>
-        <div class="form-group"><input class="form-control" type="type" name="username" placeholder="Username" autocomplete="off"></div>
-        <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email" ></div>
-        <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-        <div class="form-group"><input class="form-control" type="password" name="cpassword" placeholder="Confirm Password"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
+    <form method="post" action="">
+        {{ form.hidden_tag() }}
+
+        <div class="illustration">
+            <i class="icon ion-ios-person-outline"></i>
+        </div>
+        <div class="form-group text-danger">
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <center>{{ error }}</center>
+                {% endfor %}
+            {%elif form.email.errors%}
+                {% for error in form.email.errors %}
+                    <center>{{ error }}</center>
+                {% endfor %}
+            {%elif form.password.errors %}
+                {% for error in form.password.errors %}
+                    <center>{{ error }}</center>
+                {% endfor %}
+            {%elif form.confirm_password.errors %}
+                {% for error in form.confirm_password.errors %}
+                    <center>{{ error }}</center>
+                {% endfor %}
+            {%endif%}
+        </div>
+        <div class="form-group">
+                {{ form.username(class="form-control form-control-lg",placeholder="Username",autocomplete="off") }}
+        </div>
+        <div class="form-group">
+                {{ form.email(class="form-control form-control-lg",placeholder="Email",autocomplete="off") }}
+        </div>
+        <div class="form-group">
+                {{ form.password(class="form-control form-control-lg",placeholder="Password") }}
+        </div>
+        <div class="form-group">
+                {{ form.confirm_password(class="form-control form-control-lg",placeholder="Confirm Password") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+        </div>
     </form>
 </div>
 {%endblock content%}
+
+
+
+
+
+
+
+
+
