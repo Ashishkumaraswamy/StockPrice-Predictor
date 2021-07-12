@@ -1,7 +1,8 @@
 .login-dark {
   height: 100vh;
-  background: #475d62 url(../../assets/img/star-sky.jpg);
-  background-size: cover;
+  background: #475d62 url(/static/work-bg.png);
+  background-size: 100% 100%;
+  /* background-position: center; */
   position: relative;
 }
 
