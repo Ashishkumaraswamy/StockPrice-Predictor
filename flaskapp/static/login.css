@@ -1,6 +1,6 @@
 .login-dark {
   height: 100vh;
-  background: linear-gradient(rgba(4, 9, 30, 0.5), rgba(4, 9, 30, 0.5)),
+  background: linear-gradient(rgba(4, 9, 30, 0.3), rgba(4, 9, 30, 0.3)),
   url(/static/bg-2.jpg);
   background-size: cover;
   /* background-position: center; */
