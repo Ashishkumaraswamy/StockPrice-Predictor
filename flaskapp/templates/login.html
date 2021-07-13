@@ -27,7 +27,7 @@
         <div class="form-group">
             {{ form.submit(class="btn btn-primary btn-block") }}
         </div>
-        <a href="#" class="forgot">Forgot your email or password?</a>
+        <a href="{{url_for('forgot')}}" class="forgot">Forgot your email or password?</a>
         <hr>
         <a href="{{url_for('register')}}" class="forgot">Don't have an account? Create One</a>
     </form>

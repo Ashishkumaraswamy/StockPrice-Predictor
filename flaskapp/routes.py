@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from flaskapp.models import User, Stocks
 from flaskapp import app, db, bcrypt
-from flaskapp.forms import RegistrationForm, LoginForm
+from flaskapp.forms import RegistrationForm, LoginForm ,ForgetForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -37,6 +37,23 @@ def register():
         # flash(f'Account Created for {form.username.data}!', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/forgot", methods=['GET', 'POST'])
+def forgot():
+    form = ForgetForm()
+    if form.validate_on_submit():
+        user=User.query.filter_by(email=form.email.data).first()
+        if user:
+            hashed_password = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
+            user.password = hashed_password
+            db.session.commit()
+            print(user.password)
+            return redirect(url_for('login'))
+        else:
+            flash('NO such email exits!! Please check email', 'danger')
+    return render_template('forgot.html', title='Forgot', form=form)
 
 
 @app.route("/mainpage", methods=['GET'])
