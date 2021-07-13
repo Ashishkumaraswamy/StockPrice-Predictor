@@ -52,7 +52,7 @@ def forgot():
             print(user.password)
             return redirect(url_for('login'))
         else:
-            flash('NO such email exits!! Please check email', 'danger')
+            flash('No such email exits!! Please check email', 'danger')
     return render_template('forgot.html', title='Forgot', form=form)
 
 

@@ -26,14 +26,19 @@
             {{ form.email(class="form-control form-control-lg",placeholder="Email",autocomplete="off") }}
         </div>
         <div class="form-group">
-                {{ form.password(class="form-control form-control-lg",placeholder="Password") }}
+            {{ form.password(class="form-control form-control-lg",placeholder="Password") }}
         </div>
         <div class="form-group">
-                {{ form.confirm_password(class="form-control form-control-lg",placeholder="Confirm Password") }}
+            {{ form.confirm_password(class="form-control form-control-lg",placeholder="Confirm Password") }}
         </div>
         <div class="form-group">
             {{ form.submit(class="btn btn-primary btn-block") }}
         </div>
+        <hr>
+        <p style="color: dimgray;">Already have an account?<a href="{{url_for('login')}}"
+                style="text-decoration: none;color: rgb(172, 171, 171);">Sign
+                In</a></p>
     </form>
+
 </div>
 {%endblock content%}
