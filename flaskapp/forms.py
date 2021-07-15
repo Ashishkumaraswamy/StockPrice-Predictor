@@ -57,9 +57,4 @@ class EditProfileForm(FlaskForm):
             user=User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email already taken.')
-    def validate_password(self,currentpassword):
-        print("Current pass",currentpassword)
-        if bcrypt.check_password_hash(currentpassword.data,current_user.password):
-            pass
-        else:
-            raise ValidationError('Enter Correct Password')
+    
