@@ -69,18 +69,23 @@ def logout():
 @login_required
 def account():
     form=EditProfileForm()
-    print(current_user.password)
+    # print(current_user.password)
     if form.validate_on_submit():
-        if bcrypt.check_password_hash(current_user.password,form.currentpassword.data):
-            hashed_password = bcrypt.generate_password_hash(
-            form.newpassword.data).decode('utf-8') 
-            current_user.password=hashed_password
+        if form.currentpassword.data:
+            if bcrypt.check_password_hash(current_user.password,form.currentpassword.data):
+                hashed_password = bcrypt.generate_password_hash(
+                form.newpassword.data).decode('utf-8') 
+                current_user.password=hashed_password
+                current_user.username=form.username.data
+                current_user.email=form.email.data
+                db.session.commit()
+                return redirect(url_for('account'))
+            else:
+                flash('Enter Correct Password', 'danger')
+        else:
             current_user.username=form.username.data
             current_user.email=form.email.data
             db.session.commit()
-            return redirect(url_for('account'))
-        else:
-            flash('Enter Correct Password', 'danger')
     elif request.method=='GET':
         form.username.data=current_user.username
         form.email.data=current_user.email
