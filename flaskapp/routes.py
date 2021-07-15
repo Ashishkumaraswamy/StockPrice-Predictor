@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from flaskapp.models import User, Stocks
 from flaskapp import app, db, bcrypt
-from flaskapp.forms import RegistrationForm, LoginForm ,ForgetForm
+from flaskapp.forms import RegistrationForm, LoginForm ,ForgetForm,EditProfileForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -64,3 +64,24 @@ def mainpage():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+@app.route("/account", methods=['GET', 'POST'])
+@login_required
+def account():
+    form=EditProfileForm()
+    print(current_user.password)
+    if form.validate_on_submit():
+        if bcrypt.check_password_hash(current_user.password,form.currentpassword.data):
+            hashed_password = bcrypt.generate_password_hash(
+            form.newpassword.data).decode('utf-8') 
+            current_user.password=hashed_password
+            current_user.username=form.username.data
+            current_user.email=form.email.data
+            db.session.commit()
+            return redirect(url_for('account'))
+        else:
+            flash('Enter Correct Password', 'danger')
+    elif request.method=='GET':
+        form.username.data=current_user.username
+        form.email.data=current_user.email
+    return render_template('account.html', title='Account',form=form)

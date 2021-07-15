@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flaskapp.models import User
-
+from flask_login import current_user
+from flaskapp import bcrypt
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[
@@ -37,3 +38,28 @@ class ForgetForm(FlaskForm):
     confirm_password = PasswordField(
         'Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Confirm')
+
+class EditProfileForm(FlaskForm):
+    username = StringField('Username', validators=[
+                           DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    currentpassword=PasswordField('Current Password')
+    newpassword=PasswordField('New Password')
+    newpasswordconfirm=PasswordField('Confirm Password',validators=[EqualTo('newpassword')])
+    submit = SubmitField('Update Profile')
+    def validate_username(self,username):
+        if username.data!=current_user.username:
+            user=User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('Username already taken.')
+    def validate_email(self,email):
+        if email.data!=current_user.email:
+            user=User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('Email already taken.')
+    def validate_password(self,currentpassword):
+        print("Current pass",currentpassword)
+        if bcrypt.check_password_hash(currentpassword.data,current_user.password):
+            pass
+        else:
+            raise ValidationError('Enter Correct Password')

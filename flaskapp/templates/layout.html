@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{{url_for('static',filename='mainpage.css')}}">
 </head>
 
-<body class="hero-anime">
+<body class="dark">
   <div class="navigation-wrap bg-light start-header start-style">
     <div class="container-fluid m-1">
       <div class="row ml-4">
@@ -45,40 +45,27 @@
                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">Home</a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                  </div>
                 </li>
                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                  <a class="nav-link" href="#">Portfolio</a>
+                  <a class="nav-link" href="#">Blogs</a>
                 </li>
                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                  <a class="nav-link" href="#">Agency</a>
+                  <a class="nav-link" href="#">Stock Market</a>
                 </li>
                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                    aria-expanded="false">Services</a>
+                    aria-expanded="false">About Us</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Objective</a>
+                    <a class="dropdown-item" href="#">Data Source</a>
+                    <a class="dropdown-item" href="#">Our Projects</a>
                   </div>
-                </li>
-                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                  <a class="nav-link" href="#">Journal</a>
-                </li>
-                <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                  <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">{{current_user.username}}</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Dashboard</a>
+                    <a class="dropdown-item" href="{{url_for('account')}}">Edit Profile</a>
                     <a class="dropdown-item" href="#">Change Password</a>
                     <a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
                   </div>
@@ -94,39 +81,15 @@
     <div class="absolute-center">
       <div class="section">
         <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <h1>
-                <span>B</span><span>o</span><span>o</span><span>t</span><span>s</span><span>t</span><span>r</span><span>a</span><span>p</span>
-                <span>4</span><br>
-                <span>m</span><span>e</span><span>n</span><span>u</span>
-              </h1>
-              <p>scroll for nav animation</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section mt-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div id="switch">
-                <div id="circle"></div>
-              </div>
-            </div>
-          </div>
+          {%block content%}{%endblock%}
         </div>
       </div>
     </div>
   </div>
-  <div class="my-5 py-5">
-  </div>
 
-  <a href="https://front.codes/" class="logo" target="_blank">
-    <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-  </a>
 
-  {%block content%}{%endblock%}
+
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>

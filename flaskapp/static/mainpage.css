@@ -544,7 +544,7 @@ body.dark .logo img {
 }
 
 .container {
-    max-width: 600px;
+    width: 600px;
     margin: 0 auto;
   }
   
@@ -570,6 +570,7 @@ body.dark .logo img {
   
   input {
     position: relative;
+    flex-basis: 100%;
     width: 100%;
     padding: 8px 30px 8px 12px;
     border: 2px solid rgba(0, 0, 0, 0.08);
@@ -648,5 +649,5 @@ body.dark .logo img {
   
   .suggestion-list i {
     margin-right: 12px;
-    color: #F27121;
+    color:black;
   }
