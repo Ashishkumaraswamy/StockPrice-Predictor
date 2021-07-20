@@ -1,4 +1,34 @@
 {%extends "layout.html"%}
 {%block content%}
 
+<div class="container">
+    <canvas id="mychart" style="background-color: white;">
+
+    </canvas>
+</div>
+<script>
+    var close = {{ close }};
+    var date = {{ date| safe}};
+    let myChart = document.getElementById("mychart").getContext('2d');
+    myChart.canvas.width = 800;
+    myChart.canvas.height = 800;
+    console.log(date);
+    let barchart = new Chart(myChart, {
+        type: 'line',
+        data: {
+            labels: date,
+            datasets: [
+                {
+                    label: 'Closing Price',
+                    data: close,
+                    borderColor: 'rgba(75,192,192,0.8)',
+                    fill: false,
+
+                }
+            ]
+        },
+        options: {}
+    });
+</script>
+<script src="{{url_for('static',filename='graph.js')}}"></script>
 {%endblock content%}

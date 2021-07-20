@@ -3,7 +3,8 @@ from flaskapp.models import User, Stocks
 from flaskapp import app, db, bcrypt
 from flaskapp.forms import RegistrationForm, LoginForm ,ForgetForm,EditProfileForm
 from flask_login import login_user, current_user, logout_user, login_required
-
+import yfinance as yf
+import datetime
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/login", methods=['GET', 'POST'])
@@ -58,7 +59,15 @@ def forgot():
 
 @app.route("/mainpage", methods=['GET'])
 def mainpage():
-    return render_template('mainpage.html', title='Stock Analysis')
+    print('Hi')
+    msft = yf.Ticker("MSFT")
+    df=msft.history(period='2y')
+    import pandas as pd
+    df=pd.DataFrame(df)
+    df=df.reset_index()
+    df.Date=df.Date.astype(str)
+    print(df.Date[0])
+    return render_template('mainpage.html', title='Stock Analysis',date=list(df.Date),close=list(df.Close))
 
 @app.route("/logout")
 def logout():
